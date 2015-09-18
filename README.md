@@ -2,7 +2,7 @@
 Easy android chat/messages library using Parse
 
 - Send and receive messages between users
-- Sends push notifications when users get new messages
+- Receive push notifications when users get new messages
 
 ## How to use
 - Download this repo and add it as a dependency to your app
@@ -44,8 +44,8 @@ ParseChat.startConversation(conversation);
 - Delete conversations
 - Rename conversations
 - Add thumbnail to conversation list items
-- Add header view to conversation 
-- 
+- Add header view to conversation
+
 ![conversations](https://raw.githubusercontent.com/j-mateo/ParseChat/master/art/parsechat_conversations.png)
 ![messages](https://raw.githubusercontent.com/j-mateo/ParseChat/master/art/parsechat_messages.png)
 
