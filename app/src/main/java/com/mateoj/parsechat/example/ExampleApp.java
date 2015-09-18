@@ -12,8 +12,8 @@ public class ExampleApp extends Application {
     public void onCreate() {
         super.onCreate();
         ParseChat.Builder parseChat = new ParseChat.Builder(this,
-                "ENTER PARSE APP ID",
-                "ENTER PARSE APP KEY");
+                getString(R.string.parseAppId),
+                getString(R.string.parseAppKey));
         ParseChat.initialize(parseChat);
     }
 }

@@ -39,6 +39,7 @@ public class MessagesActivity extends AppCompatActivity {
             conversation = EventBus.getDefault().removeStickyEvent(ParseConversation.class);
         else
             finish();
+        getSupportActionBar().setTitle(conversation.getTitle());
         messagesListView = (ListView) findViewById(R.id.lvChat);
         messageEditText = (EditText) findViewById(R.id.etMessage);
         submitButton = (Button) findViewById(R.id.btSend);
@@ -95,7 +96,9 @@ public class MessagesActivity extends AppCompatActivity {
                         if (e != null) {
                             e.printStackTrace();
                         } else {
-                            mAdapter = new MessageListAdapter(MessagesActivity.this, ParseUser.getCurrentUser().getObjectId(), objects);
+                            mAdapter = new MessageListAdapter(MessagesActivity.this,
+                                    ParseUser.getCurrentUser().getObjectId(),
+                                    objects);
                             messagesListView.setAdapter(mAdapter);
                         }
                     }
