@@ -40,8 +40,12 @@ ParseChat.startConversation(conversation);
 - Send images
 - Send videos
 - Override UI styles
-- Add image to conversation list
+- Add option to block users
+- Delete conversations
+- Rename conversations
+- Add thumbnail to conversation list items
 - Add header view to conversation 
+- 
 ![conversations](https://raw.githubusercontent.com/j-mateo/ParseChat/master/art/parsechat_conversations.png)
 ![messages](https://raw.githubusercontent.com/j-mateo/ParseChat/master/art/parsechat_messages.png)
 
