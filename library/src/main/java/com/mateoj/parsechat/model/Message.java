@@ -2,7 +2,6 @@ package com.mateoj.parsechat.model;
 
 import android.util.Log;
 
-import com.mateoj.parsechat.ParseChat;
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
@@ -33,7 +32,7 @@ public class Message extends ParseObject {
         setConversation(conversation);
         setToUser(conversation.getReceiverUser());
         setText(message);
-        setFromUser(ParseChat.get().getUser());
+//        setFromUser(ParseChat.get().getUser());
     }
 
     public Message(String message) {

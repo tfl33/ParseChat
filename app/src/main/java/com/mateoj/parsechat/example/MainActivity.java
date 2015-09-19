@@ -17,19 +17,23 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
-
+    ParseChat mParseChat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ParseChat.Config config = new ParseChat.Config(this,
+                getString(R.string.parseAppId),
+                getString(R.string.parseAppKey));
+        mParseChat = new ParseChat(config);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ParseChat.showConversations(MainActivity.this);
+                mParseChat.showConversations(MainActivity.this);
             }
         });
         if (ParseUser.getCurrentUser() == null) {
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startWithCurrentUser() {
-        ParseChat.setUser(ParseUser.getCurrentUser());
+        mParseChat.setUser(ParseUser.getCurrentUser());
         ParseConversation conversation = new ParseConversation.Builder()
                 .setSender(ParseUser.getCurrentUser())
                 .setReceiver("wFVfB0023R")

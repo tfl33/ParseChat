@@ -16,33 +16,25 @@ import com.parse.ParseUser;
  */
 public class ParseChat {
     public static final String KEY_INSTALLATION_USER = "user";
-    private static ParseChat instance;
     private final Context mContext;
     private final String appId;
     private final String consumerKey;
     private ParseUser user;
 
-    private ParseChat(Builder builder) {
-        this.mContext = builder.mContext;
-        this.appId = builder.appId;
-        this.consumerKey = builder.consumerKey;
-    }
-
-    public static ParseChat get() {
-        return instance;
-    }
-
-    public static void initialize(Builder builder) {
-        instance = new ParseChat(builder);
-        Parse.enableLocalDatastore(instance.mContext);
-        Parse.initialize(instance.mContext, instance.appId, instance.consumerKey);
+    public ParseChat(Config config) {
+        this.mContext = config.mContext;
+        this.appId = config.appId;
+        this.consumerKey = config.consumerKey;
+        Parse.enableLocalDatastore(mContext);
+        Parse.initialize(mContext, appId, consumerKey);
         ParseObject.registerSubclass(ParseConversation.class);
         ParseObject.registerSubclass(Message.class);
         ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 
-    public static void setUser(ParseUser user) {
-        instance.user = user;
+
+    public void setUser(ParseUser user) {
+        this.user = user;
         ParseInstallation.getCurrentInstallation()
                 .put(KEY_INSTALLATION_USER, user);
         ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -51,29 +43,28 @@ public class ParseChat {
     public ParseUser getUser() {
         return user;
     }
-    public static void showConversations(Activity activityContext) {
+
+    public void showConversations(Activity activityContext) {
         Intent intent = new Intent(activityContext, ConversationsActivity.class);
-        intent.putExtra(ConversationsActivity.EXTRA_USER_ID, instance.getUser().getObjectId());
+        intent.putExtra(ConversationsActivity.EXTRA_USER_ID, getUser().getObjectId());
         activityContext.startActivity(intent);
     }
 
-    public static void showConversation(ParseConversation conversation) {
-
+    public void showConversation(ParseConversation conversation) {
     }
 
-    public static void startConversation(final ParseConversation conversation) {
+    public void startConversation(final ParseConversation conversation) {
         conversation.saveInBackground();
     }
 
     public void startConversation(String user) {
-
     }
 
-    public static class Builder {
+    public static class Config {
         private final Context mContext;
         private final String appId;
         private final String consumerKey;
-        public Builder(Context context, String appId, String consumerKey) {
+        public Config(Context context, String appId, String consumerKey) {
             this.mContext = context;
             this.appId = appId;
             this.consumerKey = consumerKey;
